@@ -359,25 +359,32 @@ body.modal-open{padding-right:0 !important}
     color: var(--text-accent);
     margin-top: 0.3em;
   }
-  .carousel-img {
-    max-width: 90%;
-    border-radius: 1rem;
-    box-shadow: 0 0 20px var(--border-accent); 
-    margin: 1.5rem auto;
-  }
-  .carousel-inner {
-    text-align: center;
-  }
+
+
+
+/* ==================== CARRUSEL MÓVIL DEPURADO ==================== */
+
+.carousel-img {
+  max-width: 90%;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px var(--border-accent); 
+  margin: 1.5rem auto;
+}
+.carousel-inner {
+  text-align: center;
+}
+
+.carousel-inner .item img.carousel-img {
+  display: inline-block;
+  max-width: 85%;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px var(--border-accent); 
+  margin: 2rem auto;
+}
   
-  .carousel-inner .item img.carousel-img {
-    display: inline-block;
-    max-width: 85%;
-    height: auto;
-    border-radius: 1rem;
-    box-shadow: 0 0 20px var(--border-accent); 
-    margin: 2rem auto;
-  }
-    
+
+
     /* 1️⃣ Hacemos que el ícono viva dentro del flujo flex y sea visible */
 .navicon{
   margin-left:auto;          /* lo empuja a la derecha dentro del header */

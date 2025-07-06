@@ -64,6 +64,15 @@ $(document).ready(function () {
         width: 1000,
         height: 800
     });
+    
+    
+    /***************** Inicializar Carrusel Manualmente ******************/
+    $('#engPicsCarousel').carousel();
+    $('#engPicsCarousel .carousel-control').on('click', function (e) {
+        e.preventDefault(); // Previene que el navegador haga scroll al href
+        const direction = $(this).data('slide');
+        $('#engPicsCarousel').carousel(direction);
+      });
 
     /***************** Tooltips ******************/
     $('[data-toggle="tooltip"]').tooltip();
