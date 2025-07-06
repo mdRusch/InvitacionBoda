@@ -251,30 +251,20 @@ function initBBSRMap() {
 // alert_markup
 
 
-document.addEventListener("DOMContentLoaded", function () {
-    const btn = document.getElementById("btnContribuir");
-    const box = document.getElementById("cbuBox");
+const $btn = $('#btnContribuir');
+const $box = $('#cbuBox');
 
-    btn.addEventListener("click", function () {
-      const isVisible = box.style.display === "block";
+$btn.on('click', function () {
+    const isVisible = $box.css('display') === 'block';
 
-      if (isVisible) {
-        // Ocultar con animación suave
-        box.style.opacity = 0;
-        setTimeout(() => {
-          box.style.display = "none";
-        }, 300);
-        btn.textContent = "Contribuir";
-        btn.classList.remove("active");
-      } else {
-        // Mostrar con animación suave
-        box.style.display = "block";
-        setTimeout(() => {
-          box.style.opacity = 1;
-        }, 10);
-        btn.textContent = "Ocultar";
-        btn.classList.add("active");
-      }
-    });
-  })
+    if (isVisible) {
+        $box.animate({ opacity: 0 }, 300, function () {
+            $box.css('display', 'none');
+        });
+        $btn.text('Contribuir').removeClass('active');
+    } else {
+        $box.css('display', 'block').animate({ opacity: 1 }, 300);
+        $btn.text('Ocultar').addClass('active');
+    }
+});
 })
