@@ -187,23 +187,31 @@ $(document).ready(function () {
     $('#rsvp-form').on('submit', function (e) {
         e.preventDefault();
         var data = $(this).serialize();
-
+    
         $('#alert-wrapper').html(alert_markup('info', '<strong>Sólo un momento!</strong> Estamos verificando tus detalles.'));
-
-            $.post('https://script.google.com/macros/s/AKfycbzdl4eVM61VKat9d5IkMTW4p6KJSp87PyTa8a7KcNPMt6eOpeWL2s2z5C1lidHi9WF0CA/exec', data)
-                .done(function (data) {
-                    console.log(data);
-                    $('#alert-wrapper').html('');
+    
+        $.post('https://script.google.com/macros/s/AKfycbzdl4eVM61VKat9d5IkMTW4p6KJSp87PyTa8a7KcNPMt6eOpeWL2s2z5C1lidHi9WF0CA/exec', data)
+            .done(function (data) {
+                console.log(data);
+                $('#alert-wrapper').html('');
+    
+                const asistencia = $('input[name="Asistencia"]:checked').val();
+    
+                if (asistencia && asistencia.toLowerCase() === "no") {
+                    $('#alert-wrapper').html(alert_markup('warning', '<strong>Nos apena que no puedas acompañarnos en este día.</strong>'));
+                } else if (asistencia && asistencia.toLowerCase() === "si") {
+                    $('#alert-wrapper').html(alert_markup('success', '<strong>Gracias!</strong> <br> Estamos felices que puedas celebrar con nosotros 🎉'));
                     $('#rsvp-modal').modal('show');
-                })
-                .fail(function (data) {
-                    console.log(data);
-                    $('#alert-wrapper').html(alert_markup('danger', '<strong>Lo sentimos!</strong> Hubo un problema con el servidor. '));
-                });
-
+                } else {
+                    $('#alert-wrapper').html(alert_markup('info', 'Por favor, selecciona si vas a asistir o no.'));
+                }
+            })
+            .fail(function (data) {
+                console.log(data);
+                $('#alert-wrapper').html(alert_markup('danger', '<strong>Lo sentimos!</strong> Hubo un problema con el servidor.'));
+            });
     });
-
-});
+    
 
 // alert_markup
 function alert_markup(alert_type, msg) {
@@ -268,5 +276,5 @@ document.addEventListener("DOMContentLoaded", function () {
         btn.classList.add("active");
       }
     });
-  });
-
+  })
+})
